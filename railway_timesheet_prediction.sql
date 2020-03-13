@@ -74,9 +74,37 @@ select
 	where ds.id is null
 */
 
---5. Проверить уникальность номера накладной
+--5. Проверка наличия дублей номера накладной с разными датами
+/*
+--Дубли отсутствуют
+select
+		sh.[№_Наклад]
+		,sh.[Дата накл#]
+	from (
+		select distinct
+				sh.[№_Наклад]
+				,sh.[Дата накл#]
+			from dbo.shipment sh
+		) sh
+	group by sh.[№_Наклад], sh.[Дата накл#]
+	having count(sh.[№_Наклад]) > 1
+	order by sh.[№_Наклад], sh.[Дата накл#]
 
-
+select
+		ds.ZZEXTTKTNR
+		,ds.ZZDATE_TICKET
+		,ds.ZZ_DATE_TKT
+	from (
+		select distinct
+				ds.ZZEXTTKTNR
+				,ds.ZZDATE_TICKET
+				,ds.ZZ_DATE_TKT
+			from dbo.dislocation ds
+		) ds
+	group by ds.ZZEXTTKTNR, ds.ZZDATE_TICKET, ds.ZZ_DATE_TKT
+	having count(ds.ZZEXTTKTNR) > 1
+	order by ds.ZZEXTTKTNR, ds.ZZDATE_TICKET, ds.ZZ_DATE_TKT
+*/
 
 -----
 /*
