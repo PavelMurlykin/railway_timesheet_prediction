@@ -44,8 +44,8 @@ select
 		,st.station_code
 		,st.station_desc
 	from dbo.stations st
-	--where isnull(st.station_code, N'') = N''
-	--	or isnull(st.station_desc, N'') = N''
+
+
 
 
 
